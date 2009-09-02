@@ -44,7 +44,7 @@ int main()
 	int map[MAP_HEIGHT][MAP_WIDTH];
 	int viewport[FIELD_Y][FIELD_X];
 	FILE *fp;
-	if ((fp = fopen("map", "r")) == NULL)
+	if ((fp = fopen("maps/map", "r")) == NULL)
 		finish("Couldn't open map file.");
 
 
@@ -64,10 +64,10 @@ int main()
 				player.inv_items = 0;
 				map[j][i] = GROUND;
 			}
-		
+
 	/* generate the items for the level */
 	struct item *ip, *ground_items = generate_items(21, map);
-	
+
 	/* single item test
 	 * struct item *ip, *ground_items = (struct item *)malloc(sizeof(struct item));
 	ground_items->y = 55;
@@ -75,7 +75,7 @@ int main()
 	ground_items->glyph = ']';
 	ground_items->next = NULL;
 	*/
-				
+
 	char key = getch();
 	int view_y, view_x;
 	for (;;) {
@@ -120,7 +120,7 @@ int main()
 						else
 							mvaddch(j + OFFSET_Y, i + OFFSET_X, '-');
 						break;
-					/* default:  it's an item or monster 
+					/* default:  it's an item or monster
 						mvaddch(j + OFFSET_Y, i + OFFSET_X, banana->glyph);
 						break; */
 				}
@@ -131,10 +131,10 @@ int main()
 			    ip->y < player.y + FIELD_Y/2 &&
 			    ip->x > player.x - FIELD_X/2 &&
 			    ip->x < player.x + FIELD_X/2)
-			    	mvaddch(ip->y - player.y + FIELD_Y/2 + OFFSET_Y, 
-					ip->x - player.x + FIELD_X/2 + OFFSET_X, 
+			    	mvaddch(ip->y - player.y + FIELD_Y/2 + OFFSET_Y,
+					ip->x - player.x + FIELD_X/2 + OFFSET_X,
 					ip->glyph);
-		
+
 		/* put the player in its spot and draw it all onscreen */
 		mvaddch(FIELD_Y/2 + OFFSET_Y, FIELD_X/2 + OFFSET_X, '@');
 		mvprintw(1, 0, "%3d\t%3d", player.y, player.x);
@@ -143,7 +143,7 @@ int main()
 			mvaddch(MESSAGE_Y, i, ' ');
 		draw_message();
 		refresh();
-		
+
 		/* grab and parse keypresses*/
 		switch (key = getch()) {
 			case 'q':
@@ -248,7 +248,7 @@ int action_door(int y, int x, int (*map)[MAP_WIDTH]) {
 	} else
 		return -1;
 }
-		
+
 void add_message(char new_message[]) {
 	for (msgcurr = msghead; msgcurr->next != NULL; msgcurr = msgcurr->next)
 		; /* traverse to the end */
