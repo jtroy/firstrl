@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Wno-unused-parameter -pedantic -pipe
-LIBS = -lncurses
+LIBS = -lncurses -lm
 OBJDIR = build
 OBJECTS = actor.o item.o main.o
 OBJECTS :=  $(addprefix ${OBJDIR}/,${OBJECTS})
