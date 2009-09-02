@@ -6,11 +6,11 @@
 
 /* generates a random list of n items and returns a pointer to that list */
 struct item *generate_items(int n, int (*map)[MAP_WIDTH]) {
-	int i, y, x;
+	int i; /*, y, x;*/
 	struct item *head, *ip;
 
-	//head = (struct item*)malloc(sizeof(struct item));
-	//head->next = NULL;
+	/*head = (struct item*)malloc(sizeof(struct item));
+	head->next = NULL;*/
 	head = clone_item(&(item_base[rand() % NUM_ITEMS]));
 	do {
 		head->y = rand() % MAP_HEIGHT;
@@ -19,8 +19,8 @@ struct item *generate_items(int n, int (*map)[MAP_WIDTH]) {
 
 	ip = head;
 	for (i = 1; i < n; ++i) {
-		//ip->next = (struct item*)malloc(sizeof(struct item));
-		//ip = ip->next;
+		/*ip->next = (struct item*)malloc(sizeof(struct item));
+		ip = ip->next;*/
 		ip->next = clone_item(&(item_base[rand() % NUM_ITEMS]));
 		do {
 			ip->next->y = rand() % MAP_HEIGHT;
@@ -30,12 +30,12 @@ struct item *generate_items(int n, int (*map)[MAP_WIDTH]) {
 	}
 	return head;
 }
-		
+
 struct item *clone_item(struct item *thing) {
 	struct item *ip = (struct item*)malloc(sizeof(struct item));
-	
+
 	if (ip == NULL)
-		return NULL; 
+		return NULL;
 	else {
 		ip->y = thing->y;
 		ip->x = thing->x;
@@ -58,7 +58,7 @@ void free_item_list(struct item* head) {
 	ip = head;
 	while (ip != NULL) {
 		iptemp = ip->next;
-		//destroy_item(ip->thing);
+		/*destroy_item(ip->thing);*/
 		free(ip);
 		ip = iptemp;
 	}

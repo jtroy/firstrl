@@ -21,7 +21,7 @@ int move_player(struct actor *player, int new_y, int new_x, int (*map)[MAP_WIDTH
 		for (ip = ground_items; ip != NULL; ip = ip->next) {
 			if (ip->y == player->y && ip->x == player->x) {
 				//if (ip == ground_items)
-					
+
 				if (iptemp == NULL)  {
 					//iptemp = ip->next;
 					ground_items = ground_items->next;
@@ -42,7 +42,7 @@ int move_player(struct actor *player, int new_y, int new_x, int (*map)[MAP_WIDTH
 			}
 			iptemp = ip;
 		}
-	} 
+	}
 	return 1;
 }*/
 
@@ -66,6 +66,6 @@ int pickup(struct actor *player, struct item *ground_items) {
 				return 0;
 			}
 		}
-	} 
+	}
 	return 1;
 }

@@ -12,5 +12,5 @@ struct actor {
 	int inv_items;
 };
 
-int move_player(struct actor*, int, int, int (*)[MAP_WIDTH]); 
+int move_player(struct actor*, int, int, int (*)[MAP_WIDTH]);
 int pickup(struct actor*, struct item*);

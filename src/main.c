@@ -28,6 +28,16 @@ void finish(char*);
 
 int main()
 {
+	int map[MAP_HEIGHT][MAP_WIDTH];
+	int viewport[FIELD_Y][FIELD_X];
+	FILE *fp;
+	int j, i;
+	struct actor player;
+	struct item *ip, *ground_items;
+	char key;
+	int view_y, view_x;
+	int door_y, door_x;
+
 	initscr(); cbreak(); noecho(); curs_set(0);
 	if (COLS < 80 || LINES < 24) {
 		finish("Console must be at least 80x24; quitting.");
@@ -37,13 +47,7 @@ int main()
 	msghead->next = NULL;
 	msgcurr = msghead;
 
-	int j, i;
-	struct actor player;
-
 	/* read the map */
-	int map[MAP_HEIGHT][MAP_WIDTH];
-	int viewport[FIELD_Y][FIELD_X];
-	FILE *fp;
 	if ((fp = fopen("maps/map", "r")) == NULL)
 		finish("Couldn't open map file.");
 
@@ -66,7 +70,7 @@ int main()
 			}
 
 	/* generate the items for the level */
-	struct item *ip, *ground_items = generate_items(21, map);
+	ground_items = generate_items(21, map);
 
 	/* single item test
 	 * struct item *ip, *ground_items = (struct item *)malloc(sizeof(struct item));
@@ -76,8 +80,7 @@ int main()
 	ground_items->next = NULL;
 	*/
 
-	char key = getch();
-	int view_y, view_x;
+	key = getch();
 	for (;;) {
 		/* create map viewport for current player position and current map*/
 		for (i = 0; i < FIELD_X; i++) {
@@ -190,8 +193,9 @@ int main()
 			case 'o':
 				add_message("Open door in which direction?");
 				draw_message();
+				door_y = player.y;
+				door_x = player.x;
 				refresh(); /* remove after making a redraw function or cleaning this up */
-				int door_y = player.y, door_x = player.x;
 				switch (key = getch()) {
 					case 'h':
 						door_x = player.x - 1;

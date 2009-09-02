@@ -16,7 +16,7 @@ struct item {
 	char glyph;
 	int item_class;
 	int attr1;
-	struct item *next; 
+	struct item *next;
 };
 
 static struct item item_base[NUM_ITEMS] = {
